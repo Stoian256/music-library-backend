@@ -20,4 +20,11 @@ public class ArtistService {
                 .map(artist -> new ArtistDTO(artist.getId(), artist.getName()))
                 .collect(Collectors.toList());
     }
+
+    public List<ArtistDTO> findByName(String name) {
+        List<Artist> artists = artistRepository.findByNameContainingIgnoreCase(name);
+        return artists.stream()
+                .map(artist -> new ArtistDTO(artist.getId(), artist.getName()))
+                .collect(Collectors.toList());
+    }
 }
