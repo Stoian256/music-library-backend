@@ -1,8 +1,6 @@
 package com.example.MusicLibraryBackend.controller;
 
 import com.example.MusicLibraryBackend.dto.ArtistDTO;
-import com.example.MusicLibraryBackend.model.Album;
-import com.example.MusicLibraryBackend.model.Artist;
 
 import com.example.MusicLibraryBackend.service.ArtistService;
 import lombok.RequiredArgsConstructor;

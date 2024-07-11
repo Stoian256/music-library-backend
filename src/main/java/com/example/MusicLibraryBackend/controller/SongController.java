@@ -1,12 +1,12 @@
 package com.example.MusicLibraryBackend.controller;
 
 import com.example.MusicLibraryBackend.dto.SongDTO;
+import com.example.MusicLibraryBackend.model.Song;
 import com.example.MusicLibraryBackend.service.SongService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,5 +20,22 @@ public class SongController {
     @GetMapping("/albums/{albumId}")
     public List<SongDTO> getSongsByAlbum(@PathVariable Long albumId) {
         return songService.getSongsByAlbum(albumId);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<SongDTO> getSongById(@PathVariable Long id) {
+        return ResponseEntity.ok(songService.findById(id));
+    }
+
+    @PostMapping
+    public ResponseEntity<Song> createSong(@RequestBody Song song) {
+        Song savedSong = songService.save(song);
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedSong);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteSong(@PathVariable Long id) {
+        songService.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
 }

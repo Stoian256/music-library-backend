@@ -20,4 +20,17 @@ public class SongService {
                 .map(song -> new SongDTO(song.getId(), song.getTitle(), song.getLength()))
                 .collect(Collectors.toList());
     }
+
+    public SongDTO findById(Long id) {
+        Song song = songRepository.findById(id).orElse(null);
+        return new SongDTO(song.getId(), song.getTitle(), song.getLength());
+    }
+
+    public Song save(Song song) {
+        return songRepository.save(song);
+    }
+
+    public void deleteById(Long id) {
+        songRepository.deleteById(id);
+    }
 }

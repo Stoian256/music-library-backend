@@ -27,4 +27,17 @@ public class ArtistService {
                 .map(artist -> new ArtistDTO(artist.getId(), artist.getName()))
                 .collect(Collectors.toList());
     }
+
+    public ArtistDTO findById(Long id) {
+        Artist artist = artistRepository.findById(id).orElse(null);
+        return new ArtistDTO(artist.getId(),artist.getName());
+    }
+
+    public Artist save(Artist artist) {
+        return artistRepository.save(artist);
+    }
+
+    public void deleteById(Long id) {
+        artistRepository.deleteById(id);
+    }
 }

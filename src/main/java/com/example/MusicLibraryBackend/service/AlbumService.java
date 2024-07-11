@@ -20,4 +20,17 @@ public class AlbumService {
                 .map(album -> new AlbumDTO(album.getId(), album.getTitle(), album.getDescription()))
                 .collect(Collectors.toList());
     }
+
+    public AlbumDTO findById(Long id) {
+        Album album = albumRepository.findById(id).orElse(null);
+        return new AlbumDTO(album.getId(),album.getTitle(),album.getDescription());
+    }
+
+    public Album save(Album album) {
+        return albumRepository.save(album);
+    }
+
+    public void deleteById(Long id) {
+        albumRepository.deleteById(id);
+    }
 }
